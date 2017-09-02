@@ -6,86 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>407</width>
-    <height>95</height>
+    <width>490</width>
+    <height>301</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>10</y>
-      <width>401</width>
-      <height>81</height>
+      <width>471</width>
+      <height>281</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
      <item>
-      <layout class="QGridLayout" name="gridLayout">
-       <property name="leftMargin">
-        <number>15</number>
-       </property>
-       <property name="rightMargin">
-        <number>15</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="2">
-        <widget class="QRadioButton" name="gdRadio">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="folderBtn">
          <property name="text">
-          <string>GOOGLE DRIVE</string>
+          <string>Pick Folder</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QRadioButton" name="dropboxRadio">
-         <property name="text">
-          <string>DROPBOX</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QRadioButton" name="ftpRadio">
-         <property name="text">
-          <string>FTP</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QRadioButton" name="odRadio">
-         <property name="text">
-          <string>ONE DRIVE</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -100,20 +47,16 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="connectBtn">
+        <widget class="QPushButton" name="encryptBtn">
          <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="configBtn">
-         <property name="text">
-          <string>PushButton</string>
+          <string>Encrypt and Upload!</string>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="fileView"/>
      </item>
     </layout>
    </widget>
