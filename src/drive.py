@@ -1,3 +1,5 @@
+#pip install --upgrade google-api-python-client
+
 from __future__ import print_function
 import httplib2
 import os
@@ -15,6 +17,8 @@ try:
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
 except ImportError:
     flags = None
+
+
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/drive-python-quickstart.json
@@ -54,23 +58,40 @@ def get_credentials():
 
 
 
-def upload():
+
+
+def upload(directorio, archivo):
+
+    nombre = archivo
 
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('drive', 'v3', http=http)
 
 
-    file_metadata = { 'name' : 'asdf.png' }
-    media = MediaFileUpload('asdf.png',mimetype='image/jpeg')
-    
+    file_metadata = { 'name' : nombre }
+
+
+    #media = MediaFileUpload(nombre, mimetype='image/jpeg')
+    media = MediaFileUpload(directorio + '/' + archivo, mimetype='text/plain')
+    #text/plain
+
+
     file = service.files().create(body=file_metadata,media_body=media,fields='id').execute()
     
-    print("file id: ",file.get("id"))
+    fileId = file.get("id")
+
+    print("file id: ", fileId)
 
 
-def download():
-    #asdf.png
+
+    return fileId
+
+
+
+
+def download(file_id_archivo, Directorio_archivo_donde_bajar):
+    
 
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
@@ -78,25 +99,28 @@ def download():
 
 
 
-    file_id = '0B9Zn7sDASk4YSUdEYTdIZmF3dzg'
-    # request = service.files().get_media(fileId=file_id)
-    # fh = io.FileIO("asd","wb")
-    # downloader = MediaIoBaseDownload(fh, request)
-    # done = False
+    file_id = file_id_archivo
+    directorio = Directorio_archivo_donde_bajar
 
-    # while done is False:
-    #     status, done = downloader.next_chunk()
-    #     print ("Download ",int(status.progress() * 100)
-
+        
     request = service.files().get_media(fileId=file_id)
-    fh = io.FileIO("filename", 'wb')
+    
+    fh = io.FileIO(directorio, 'wb')
     downloader = MediaIoBaseDownload(fh, request)
     done = False
+    
     while done is False:
         status, done = downloader.next_chunk()
+        estado = status.progress()*100
+        print("Bajando: ", estado)
+    print("Finalizado...")
 
 
-def main():
+
+
+
+
+def mostrar():
     """Shows basic usage of the Google Drive API.
 
     Creates a Google Drive API service object and outputs the names and IDs
@@ -107,16 +131,28 @@ def main():
     service = discovery.build('drive', 'v3', http=http)
 
     results = service.files().list(
-        pageSize=10,fields="nextPageToken, files(id, name)").execute()
+        pageSize=25,fields="nextPageToken, files(id, name)").execute()
     items = results.get('files', [])
     if not items:
         print('No files found.')
     else:
-        print('Files:')
-        for item in items:
-            print('{0} ({1})'.format(item['name'], item['id']))
+        print(items)
+	
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
-    main()
-    upload()
-    download()
+    
+
+    #main()
+    
+    #download("0B9Zn7sDASk4YSTRqanZadmtzd3c","hola")
+
+    id = upload("./main.py")
+
