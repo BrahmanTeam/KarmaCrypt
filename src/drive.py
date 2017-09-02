@@ -154,5 +154,5 @@ if __name__ == '__main__':
     
     #download("0B9Zn7sDASk4YSTRqanZadmtzd3c","hola")
 
-    id = upload("./main.py")
+    id = upload('.', 'main.py')
 
